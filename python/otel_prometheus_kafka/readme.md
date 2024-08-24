@@ -23,7 +23,7 @@ application -> -- perodic push ---> otel collector (:4317 | :4318)
    there are two ways now:
    1. pull - let the prometheus scrape you (the collector)
      1a. configure a port and let the prometheus scrape you - this is what we have done. check prometheus.yaml
-   2. push from collector to prometheous - prometheusremotewrite
+   2. push from collector to prometheus - `prometheusremotewrite` https://prometheus.io/docs/specs/remote_write_spec/
 * now metrics has reached to prometheus and you can use grafana now
 
 

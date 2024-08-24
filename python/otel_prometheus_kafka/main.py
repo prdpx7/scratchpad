@@ -77,8 +77,9 @@ def main(consume, brokers, topic, auth, mechanism, username, password, msg_key, 
             print(f"Received message: {msg.value().decode('utf-8')}")
             consumer.commit(msg)
             meter_consumer_latency.record((time.time()-start_time)*100, {"topic": topic, "cluster": "kafka_docker", "group_id": group_id})
-            # confluent_kafka.Message class not method `len`. this is incorrect https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html#confluent_kafka.Message.len
-            # instead we have to do len(msg). see issue: https://github.com/confluentinc/confluent-kafka-python/issues/859#issuecomment-625059399
+            # confluent_kafka.Message class has no method `len`. this is incorrect https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html#confluent_kafka.Message.len
+            # instead, we have to do len(msg). 
+            # see issue: https://github.com/confluentinc/confluent-kafka-python/issues/859#issuecomment-625059399
             meter_bytes_in.record(len(msg), {"topic": topic, "cluster": "kafka_docker"})
     else:
         producer = get_producer_client(config)
