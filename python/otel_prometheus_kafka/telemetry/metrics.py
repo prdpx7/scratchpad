@@ -173,7 +173,7 @@ class KafkaMetrics(Metrics):
         )
 
     # kafka consumer metrics
-    def meter_rebalances(self, value: int, attrs: Dict[str, Any]):
+    def record_rebalances(self, value: int, attrs: Dict[str, Any]):
         """
         A Counter metric to measure rebalances happening on consumer
         value: rebalance count
@@ -181,7 +181,7 @@ class KafkaMetrics(Metrics):
         """
         self.rebalances.add(value, attributes=attrs)
 
-    def meter_rebalancing_time(self, value: int, attrs: Dict[str, Any]):
+    def record_rebalancing_time(self, value: float, attrs: Dict[str, Any]):
         """
         A histogram metric to record the time it takes when a consumer leaves the group and joins back i.e rebalancing
         """
